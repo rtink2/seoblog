@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
+import Link from 'next/link';
+import Router from 'next/router';
 import {
   Collapse,
   Navbar,
@@ -6,12 +8,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
+
+import { APP_NAME } from '../config';
+import { isAuth, signout } from '../actions/auth';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,30 +23,40 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar color='light' light expand='md'>
-        <NavbarBrand href='/'>reactstrap</NavbarBrand>
+      <Navbar expand='md' className='header'>
+        <Link href='/'>
+          <NavLink className='font-weight-bold' style={{ cursor: 'pointer' }}>
+            {APP_NAME}
+          </NavLink>
+        </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='ml-auto' navbar>
-            <NavItem>
-              <NavLink href='/components/'>Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href='https://github.com/reactstrap/reactstrap'>
-                GitHub
-              </NavLink>
-            </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            {!isAuth() && (
+              <Fragment>
+                <NavItem style={{ cursor: 'pointer' }}>
+                  <Link href='/signin'>
+                    <NavLink>SignIn</NavLink>
+                  </Link>
+                </NavItem>
+                <NavItem style={{ cursor: 'pointer' }}>
+                  <Link href='/signup'>
+                    <NavLink>SignUp</NavLink>
+                  </Link>
+                </NavItem>
+              </Fragment>
+            )}
+
+            {isAuth() && (
+              <NavItem>
+                <NavLink
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => signout(() => Router.replace(`/signin`))}
+                >
+                  SignOut
+                </NavLink>
+              </NavItem>
+            )}
           </Nav>
         </Collapse>
       </Navbar>

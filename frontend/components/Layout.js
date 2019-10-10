@@ -5,10 +5,9 @@ const Layout = ({ children }) => {
   return (
     <Fragment>
       <Header />
-        {children}
-      <p>Footer</p>
+      {children}
     </Fragment>
-  )
-}
+  );
+};
 
 export default Layout;

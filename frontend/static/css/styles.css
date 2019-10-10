@@ -1,0 +1,28 @@
+.alert {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+}
+
+.alert-info {
+  top: 10em;
+}
+
+.alert-danger,
+.alert-warning {
+  bottom: 20em;
+}
+
+.header {
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+}
