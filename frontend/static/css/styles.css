@@ -1,3 +1,18 @@
+#nprogress .bar {
+  height: 6px !important;
+  background-color: rgb(231, 7, 224);
+}
+
+.ql-editor {
+  min-height: 300px;
+}
+
+.featured-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+}
+
 .alert {
   width: 50%;
   margin: auto;
@@ -25,4 +40,8 @@
     ),
     linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
     linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+}
+
+.myCursor {
+  cursor: pointer;
 }

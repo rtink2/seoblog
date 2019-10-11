@@ -1,6 +1,7 @@
 import { useState, Fragment } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
+import NProgress from 'nprogress';
 import {
   Collapse,
   Navbar,
@@ -10,9 +11,14 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
+// import '.././node_modules/nprogress/nprogress.css';
 
 import { APP_NAME } from '../config';
 import { isAuth, signout } from '../actions/auth';
+
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete = url => NProgress.done();
+Router.onRouteChangeError = url => NProgress.done();
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,32 +31,50 @@ const Header = () => {
     <div>
       <Navbar expand='md' className='header'>
         <Link href='/'>
-          <NavLink className='font-weight-bold' style={{ cursor: 'pointer' }}>
-            {APP_NAME}
-          </NavLink>
+          <NavLink className='font-weight-bold myCursor'>{APP_NAME}</NavLink>
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='ml-auto' navbar>
             {!isAuth() && (
               <Fragment>
-                <NavItem style={{ cursor: 'pointer' }}>
+                <NavItem>
                   <Link href='/signin'>
-                    <NavLink>SignIn</NavLink>
+                    <NavLink className='myCursor'>SignIn</NavLink>
                   </Link>
                 </NavItem>
-                <NavItem style={{ cursor: 'pointer' }}>
+                <NavItem>
                   <Link href='/signup'>
-                    <NavLink>SignUp</NavLink>
+                    <NavLink className='myCursor'>SignUp</NavLink>
                   </Link>
                 </NavItem>
               </Fragment>
             )}
 
+            {isAuth() && isAuth().role === 0 && (
+              <NavItem>
+                <Link href='/user'>
+                  <NavLink className='myCursor'>
+                    {`${isAuth().name}'s Dashboard`}
+                  </NavLink>
+                </Link>
+              </NavItem>
+            )}
+
+            {isAuth() && isAuth().role === 1 && (
+              <NavItem>
+                <Link href='/admin'>
+                  <NavLink className='myCursor'>
+                    {`${isAuth().name}'s Dashboard`}
+                  </NavLink>
+                </Link>
+              </NavItem>
+            )}
+
             {isAuth() && (
               <NavItem>
                 <NavLink
-                  style={{ cursor: 'pointer' }}
+                  className='myCursor'
                   onClick={() => signout(() => Router.replace(`/signin`))}
                 >
                   SignOut
