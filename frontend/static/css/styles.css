@@ -45,3 +45,34 @@
 .myCursor {
   cursor: pointer;
 }
+
+.myButton {
+  color: rgb(242, 138, 10);
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+}
+
+.myButton:hover {
+  color: rgb(134, 10, 242);
+}
+
+.myButtonX {
+  color: rgb(134, 10, 242);
+  border: 1px solid pink;
+}
+
+.myButtonX:hover {
+  color: rgb(242, 138, 10);
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+}
